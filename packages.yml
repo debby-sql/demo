@@ -1,0 +1,3 @@
+packages:
+  - git: "https://github.com/debby-sql/debby.git"
+    revision: main
