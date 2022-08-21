@@ -2,32 +2,26 @@ debby-demo:
 
   target: tmp
   outputs:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      threads: 8
+      user: "{{ env_var('SNOWSQL_USER') }}"
+      password: "{{ env_var('SNOWSQL_PWD') }}"
+      account: "{{ env_var('SNOWSQL_ACCOUNT') }}"
+      database: "{{ env_var('SNOWSQL_DATABASE', 'demo') }}"
+      schema: "{{ env_var('SNOWSQL_SCHEMA', 'dev') }}"
+      warehouse: "{{ env_var('SNOWSQL_WAREHOUSE', 'demo') }}"
+      role: "{{ env_var('SNOWSQL_ROLE', 'demo_transformer') }}"
 
-    tmp:
-      type: sqlite
-
-      # sqlite locks the whole db on writes so anything > 1 won't help
-      threads: 1
-
-      # value is arbitrary
-      database: "database"
-
-      # value of 'schema' must be defined in schema_paths below. in most cases,
-      # this should be 'main'
-      schema: 'main'
-
-      # connect schemas to paths: at least one of these must be 'main'
-      schemas_and_paths:
-        main: "{{ env_var('PWD') }}/debby.db"
-        # dataset: '/my_project/data/dataset_v1.db'
-
-      # directory where all *.db files are attached as schema, using base filename
-      # as schema name, and where new schema are created. this can overlap with the dirs of
-      # files in schemas_and_paths as long as there's no conflicts.
-      schema_directory: "{{ env_var('PWD') }}"
-
-      # optional: list of file paths of SQLite extensions to load. see README for more details.
-      # extensions:
-      #   - "/path/to/sqlean/crypto.so"
-      #   - "/path/to/sqlean/math.so"
-      #   - "/path/to/sqlean/text.so"
+    prod:
+      type: snowflake
+      threads: 8
+      user: "{{ env_var('SNOWSQL_USER') }}"
+      password: "{{ env_var('SNOWSQL_PWD') }}"
+      account: "{{ env_var('SNOWSQL_ACCOUNT') }}"
+      database: "{{ env_var('SNOWSQL_DATABASE', 'demo') }}"
+      schema: "{{ env_var('SNOWSQL_SCHEMA', 'prod') }}"
+      warehouse: "{{ env_var('SNOWSQL_WAREHOUSE', 'demo') }}"
+      role: "{{ env_var('SNOWSQL_ROLE', 'demo_transformer_prod') }}"
