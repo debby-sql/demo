@@ -24,7 +24,7 @@ query-comment:
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
-  jaffle_shop:
-      materialized: table
-      staging:
-        materialized: view
+  debby_demo:
+    materialized: table
+    staging:
+      materialized: view
