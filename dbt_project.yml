@@ -21,6 +21,10 @@ query-comment:
   comment: "{{ debby.query_comment(node) }}"
   append: true
 
+tests:
+  store_failures: true
+  limit: 10
+
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
